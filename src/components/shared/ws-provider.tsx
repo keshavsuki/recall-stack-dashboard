@@ -27,7 +27,12 @@ export function useWS() {
   return useContext(WSContext);
 }
 
-const IS_DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+// Demo mode: env var OR detected by hostname (Vercel deployments)
+const IS_DEMO =
+  process.env.NEXT_PUBLIC_DEMO_MODE === "true" ||
+  (typeof window !== "undefined" &&
+    (window.location.hostname.includes("vercel.app") ||
+     window.location.hostname.includes("vercel.sh")));
 
 const WS_URL =
   typeof window !== "undefined" && !IS_DEMO
