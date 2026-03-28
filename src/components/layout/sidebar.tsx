@@ -29,29 +29,29 @@ export function Sidebar() {
   const { connected } = useWS();
 
   return (
-    <aside className="flex h-screen w-56 flex-col border-r border-zinc-800 bg-zinc-950">
-      <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-blue-600">
+    <aside className="flex h-screen w-60 flex-col border-r border-zinc-200/80 bg-white shadow-[1px_0_8px_rgba(0,0,0,0.03)]">
+      <div className="flex items-center gap-3 px-5 py-5">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-blue-500 shadow-md shadow-violet-200/50">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
-            className="h-4 w-4 text-white"
+            className="h-4.5 w-4.5 text-white"
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
         </div>
         <div>
-          <div className="text-sm font-semibold text-zinc-100">recall-stack</div>
-          <div className="flex items-center gap-1.5 text-[10px] text-zinc-500">
+          <div className="text-sm font-bold text-zinc-900 tracking-tight">recall-stack</div>
+          <div className="flex items-center gap-1.5 text-[11px] text-zinc-400">
             <StatusDot active={connected} />
             {connected ? "live" : "connecting..."}
           </div>
         </div>
       </div>
 
-      <nav className="flex-1 space-y-1 px-2 py-3">
+      <nav className="flex-1 space-y-0.5 px-3 py-2">
         {NAV_ITEMS.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -60,10 +60,10 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-200",
                 active
-                  ? "bg-zinc-800 text-zinc-100"
-                  : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
+                  ? "bg-gradient-to-r from-violet-50 to-blue-50 text-violet-700 shadow-sm"
+                  : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700"
               )}
             >
               <svg
@@ -73,7 +73,10 @@ export function Sidebar() {
                 strokeWidth={1.5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="h-4 w-4"
+                className={cn(
+                  "h-[18px] w-[18px]",
+                  active ? "text-violet-500" : "text-zinc-400"
+                )}
               >
                 <path d={ICONS[item.icon]} />
               </svg>
@@ -83,9 +86,9 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="border-t border-zinc-800 px-4 py-3">
-        <div className="text-[10px] uppercase tracking-wider text-zinc-600">
-          recall-stack-dashboard
+      <div className="border-t border-zinc-100 px-5 py-4">
+        <div className="text-[10px] uppercase tracking-widest text-zinc-300 font-medium">
+          recall-stack v1.0
         </div>
       </div>
     </aside>

@@ -4,6 +4,14 @@ import { useWS } from "@/components/shared/ws-provider";
 import { StatusDot } from "@/components/shared/badge";
 import { cn } from "@/lib/utils";
 
+const LAYER_GRADIENTS = [
+  "from-violet-500 to-violet-600",
+  "from-blue-500 to-blue-600",
+  "from-indigo-500 to-indigo-600",
+  "from-purple-500 to-purple-600",
+  "from-fuchsia-500 to-fuchsia-600",
+];
+
 interface LayerProps {
   number: number;
   name: string;
@@ -18,30 +26,30 @@ function Layer({ number, name, file, type, active, onClick }: LayerProps) {
     <button
       onClick={onClick}
       className={cn(
-        "flex w-full items-center gap-4 rounded-lg border px-4 py-3 text-left transition-all",
+        "flex w-full items-center gap-4 rounded-xl border px-4 py-3.5 text-left transition-all duration-200",
         active
-          ? "border-zinc-700 bg-zinc-800/80 hover:bg-zinc-800"
-          : "border-zinc-800/50 bg-zinc-900/30 opacity-50"
+          ? "border-zinc-200 bg-white shadow-sm card-premium"
+          : "border-zinc-100 bg-zinc-50/50 opacity-50"
       )}
     >
       <div
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold",
+          "flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold",
           active
-            ? "bg-gradient-to-br from-violet-600/30 to-blue-600/30 text-violet-400"
-            : "bg-zinc-800 text-zinc-600"
+            ? `bg-gradient-to-br ${LAYER_GRADIENTS[number - 1]} text-white shadow-sm`
+            : "bg-zinc-100 text-zinc-400"
         )}
       >
         L{number}
       </div>
       <div className="flex-1">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-zinc-200">{name}</span>
-          <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] text-zinc-500">
+          <span className="text-sm font-semibold text-zinc-800">{name}</span>
+          <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
             {type}
           </span>
         </div>
-        <span className="text-xs text-zinc-600">{file}</span>
+        <span className="text-xs text-zinc-400">{file}</span>
       </div>
       <StatusDot active={active} />
     </button>
@@ -90,9 +98,9 @@ export function LayerStack() {
   ];
 
   return (
-    <div className="space-y-2">
-      <h2 className="text-sm font-medium text-zinc-400">Memory Layers</h2>
-      <div className="space-y-1.5">
+    <div className="space-y-3 animate-slide-up">
+      <h2 className="text-sm font-semibold text-zinc-800">Memory Layers</h2>
+      <div className="space-y-2 stagger-children">
         {layers.map((layer) => (
           <Layer key={layer.number} {...layer} />
         ))}

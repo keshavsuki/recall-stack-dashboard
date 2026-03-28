@@ -17,8 +17,8 @@ export function LessonsTable() {
 
   if (!state || state.lessons.length === 0) {
     return (
-      <Card className="border-zinc-800 bg-zinc-900/50">
-        <CardContent className="p-6 text-center text-sm text-zinc-600">
+      <Card className="border-zinc-200/80 bg-white shadow-sm">
+        <CardContent className="p-8 text-center text-sm text-zinc-400">
           No lessons recorded yet. Corrections from Claude Code sessions appear
           here.
         </CardContent>
@@ -31,16 +31,16 @@ export function LessonsTable() {
   );
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900/50">
+    <Card className="border-zinc-200/80 bg-white shadow-sm rounded-2xl overflow-hidden animate-slide-up">
       <Table>
         <TableHeader>
-          <TableRow className="border-zinc-800 hover:bg-transparent">
-            <TableHead className="text-zinc-500">Date</TableHead>
-            <TableHead className="text-zinc-500">Mistake</TableHead>
-            <TableHead className="text-zinc-500">Rule</TableHead>
-            <TableHead className="text-zinc-500">Source</TableHead>
-            <TableHead className="text-right text-zinc-500">Count</TableHead>
-            <TableHead className="text-zinc-500">Status</TableHead>
+          <TableRow className="border-zinc-100 hover:bg-transparent bg-zinc-50/80">
+            <TableHead className="text-zinc-500 font-semibold text-xs">Date</TableHead>
+            <TableHead className="text-zinc-500 font-semibold text-xs">Mistake</TableHead>
+            <TableHead className="text-zinc-500 font-semibold text-xs">Rule</TableHead>
+            <TableHead className="text-zinc-500 font-semibold text-xs">Source</TableHead>
+            <TableHead className="text-right text-zinc-500 font-semibold text-xs">Count</TableHead>
+            <TableHead className="text-zinc-500 font-semibold text-xs">Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -48,33 +48,34 @@ export function LessonsTable() {
             <TableRow
               key={i}
               className={cn(
-                "border-zinc-800/50",
-                lesson.failureCount >= 2 && !lesson.promoted && "bg-amber-500/5",
-                lesson.promoted && "bg-emerald-500/5"
+                "border-zinc-100/80 transition-colors duration-150",
+                i % 2 === 0 ? "bg-white" : "bg-zinc-50/40",
+                lesson.failureCount >= 2 && !lesson.promoted && "bg-amber-50/40",
+                lesson.promoted && "bg-emerald-50/40"
               )}
             >
-              <TableCell className="font-mono text-xs text-zinc-500">
+              <TableCell className="font-mono text-xs text-zinc-400">
                 {lesson.date}
               </TableCell>
-              <TableCell className="text-sm text-zinc-300">
+              <TableCell className="text-sm text-zinc-700 font-medium">
                 {lesson.mistake}
               </TableCell>
-              <TableCell className="text-sm text-zinc-400">
+              <TableCell className="text-sm text-zinc-500">
                 {lesson.rule}
               </TableCell>
-              <TableCell className="text-xs text-zinc-600">
+              <TableCell className="text-xs text-zinc-400">
                 {lesson.source}
               </TableCell>
               <TableCell className="text-right">
                 {lesson.failureCount > 0 && (
                   <span
                     className={cn(
-                      "font-mono text-xs",
+                      "font-mono text-xs font-bold",
                       lesson.failureCount >= 3
-                        ? "text-emerald-400"
+                        ? "text-emerald-500"
                         : lesson.failureCount >= 2
-                          ? "text-amber-400"
-                          : "text-zinc-500"
+                          ? "text-amber-500"
+                          : "text-zinc-400"
                     )}
                   >
                     {lesson.failureCount}/3
@@ -83,11 +84,11 @@ export function LessonsTable() {
               </TableCell>
               <TableCell>
                 {lesson.promoted ? (
-                  <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] text-emerald-400">
+                  <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
                     GATED
                   </span>
                 ) : lesson.failureCount >= 2 ? (
-                  <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] text-amber-400">
+                  <span className="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold text-amber-600">
                     APPROACHING
                   </span>
                 ) : null}

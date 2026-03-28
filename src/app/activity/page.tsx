@@ -5,7 +5,7 @@ export default function ActivityPage() {
   return (
     <div className="flex h-full flex-col">
       <Header title="Activity" />
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-8">
         <ActivityLog />
       </div>
     </div>

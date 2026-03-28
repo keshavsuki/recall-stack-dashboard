@@ -7,18 +7,20 @@ interface StatCardProps {
   label: string;
   value: string | number;
   sub?: string;
-  color?: string;
+  gradient: string;
+  accentBg: string;
 }
 
-function StatCard({ label, value, sub, color = "text-zinc-100" }: StatCardProps) {
+function StatCard({ label, value, sub, gradient, accentBg }: StatCardProps) {
   return (
-    <Card className="border-zinc-800 bg-zinc-900/50">
-      <CardContent className="p-4">
-        <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+    <Card className={`card-premium border-zinc-200/80 bg-white shadow-sm overflow-hidden`}>
+      <CardContent className="relative p-5">
+        <div className={`absolute top-0 right-0 h-24 w-24 rounded-bl-[60px] opacity-[0.04] ${accentBg}`} />
+        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
           {label}
         </p>
-        <p className={`mt-1 text-2xl font-bold ${color}`}>{value}</p>
-        {sub && <p className="mt-0.5 text-xs text-zinc-600">{sub}</p>}
+        <p className={`mt-2 text-3xl font-extrabold tracking-tight ${gradient}`}>{value}</p>
+        {sub && <p className="mt-1 text-xs text-zinc-400 font-medium">{sub}</p>}
       </CardContent>
     </Card>
   );
@@ -29,12 +31,12 @@ export function StatusCards() {
 
   if (!state) {
     return (
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-5 stagger-children">
         {[1, 2, 3, 4].map((i) => (
-          <Card key={i} className="border-zinc-800 bg-zinc-900/50">
-            <CardContent className="p-4">
-              <div className="h-4 w-16 animate-pulse rounded bg-zinc-800" />
-              <div className="mt-2 h-8 w-10 animate-pulse rounded bg-zinc-800" />
+          <Card key={i} className="border-zinc-200/80 bg-white shadow-sm">
+            <CardContent className="p-5">
+              <div className="h-4 w-20 animate-pulse rounded-lg bg-zinc-100" />
+              <div className="mt-3 h-9 w-14 animate-pulse rounded-lg bg-zinc-100" />
             </CardContent>
           </Card>
         ))}
@@ -59,12 +61,13 @@ export function StatusCards() {
   ].filter(Boolean).length;
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 gap-5 stagger-children">
       <StatCard
         label="Active Gates"
         value={gates.filter((g) => g.enabled).length}
         sub={`${blockCount} blocking, ${warnCount} warning`}
-        color="text-red-400"
+        gradient="text-gradient"
+        accentBg="bg-red-500"
       />
       <StatCard
         label="Lessons Learned"
@@ -74,7 +77,8 @@ export function StatusCards() {
             ? `${approaching} approaching gate promotion`
             : "none approaching promotion"
         }
-        color="text-amber-400"
+        gradient="text-gradient"
+        accentBg="bg-amber-500"
       />
       <StatCard
         label="Sessions Today"
@@ -84,13 +88,15 @@ export function StatusCards() {
             ? `${state.health.activeSessions} active now`
             : "none active"
         }
-        color="text-purple-400"
+        gradient="text-gradient"
+        accentBg="bg-violet-500"
       />
       <StatCard
         label="Memory Layers"
         value={`${layers}/5`}
         sub="active"
-        color="text-emerald-400"
+        gradient="text-gradient"
+        accentBg="bg-emerald-500"
       />
     </div>
   );

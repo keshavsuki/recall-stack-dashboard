@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex h-screen bg-zinc-950 text-zinc-100">
+      <body className="flex h-screen bg-[#f8f9fb] text-zinc-800">
         <WSProvider>
           <Sidebar />
           <main className="flex-1 overflow-auto">{children}</main>

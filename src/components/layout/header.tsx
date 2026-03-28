@@ -8,20 +8,20 @@ export function Header({ title }: { title: string }) {
   const health = state?.health;
 
   return (
-    <header className="flex items-center justify-between border-b border-zinc-800 px-6 py-3">
-      <h1 className="text-lg font-semibold text-zinc-100">{title}</h1>
-      <div className="flex items-center gap-4 text-xs text-zinc-500">
-        <div className="flex items-center gap-1.5">
+    <header className="flex items-center justify-between border-b border-zinc-200/80 bg-white/80 px-8 py-4 backdrop-blur-sm">
+      <h1 className="text-xl font-bold text-zinc-900 tracking-tight">{title}</h1>
+      <div className="flex items-center gap-5 text-[13px]">
+        <div className="flex items-center gap-2 text-zinc-500">
           <StatusDot active={!!health?.watcherActive} />
-          Watcher
+          <span className="font-medium">Watcher</span>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2 text-zinc-500">
           <StatusDot active={!!health?.hindsightAvailable} />
-          Hindsight
+          <span className="font-medium">Hindsight</span>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2 rounded-full bg-zinc-50 px-3 py-1 text-zinc-500">
           <StatusDot active={(health?.activeSessions || 0) > 0} />
-          {health?.activeSessions || 0} sessions
+          <span className="font-medium">{health?.activeSessions || 0} sessions</span>
         </div>
       </div>
     </header>

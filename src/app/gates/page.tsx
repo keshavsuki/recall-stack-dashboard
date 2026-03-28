@@ -12,18 +12,18 @@ export default function GatesPage() {
   return (
     <div className="flex h-full flex-col">
       <Header title="Gates" />
-      <div className="flex-1 space-y-6 p-6">
+      <div className="flex-1 space-y-6 p-8">
         <div>
-          <h2 className="mb-3 text-sm font-medium text-zinc-400">
+          <h2 className="mb-3 text-sm font-semibold text-zinc-800">
             Active Rules ({gates.length})
           </h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 stagger-children">
             {gates.map((gate) => (
               <GateCard key={gate.name} gate={gate} />
             ))}
           </div>
           {gates.length === 0 && (
-            <p className="text-sm text-zinc-600">
+            <p className="text-sm text-zinc-400">
               No gates configured. Add rules to gates.json.
             </p>
           )}

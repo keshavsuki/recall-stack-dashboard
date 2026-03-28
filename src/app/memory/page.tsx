@@ -6,8 +6,8 @@ export default function MemoryPage() {
   return (
     <div className="flex h-full flex-col">
       <Header title="Memory" />
-      <div className="flex-1 p-6">
-        <div className="grid grid-cols-2 gap-6">
+      <div className="flex-1 p-8">
+        <div className="grid grid-cols-2 gap-8">
           <LayerStack />
           <PrimerViewer />
         </div>

@@ -6,9 +6,9 @@ export default function DashboardPage() {
   return (
     <div className="flex h-full flex-col">
       <Header title="Dashboard" />
-      <div className="flex-1 space-y-6 p-6">
-        <ActivityFeed />
+      <div className="flex-1 space-y-6 p-8">
         <StatusCards />
+        <ActivityFeed />
       </div>
     </div>
   );
