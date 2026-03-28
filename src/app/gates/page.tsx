@@ -3,6 +3,7 @@
 import { Header } from "@/components/layout/header";
 import { GateCard } from "@/components/gates/gate-card";
 import { PromotionPipeline } from "@/components/gates/promotion-pipeline";
+import { TriggerLog } from "@/components/gates/trigger-log";
 import { useWS } from "@/components/shared/ws-provider";
 
 export default function GatesPage() {
@@ -17,6 +18,9 @@ export default function GatesPage() {
       <div className="flex-1 space-y-8 p-8">
         {/* Pipeline hero */}
         <PromotionPipeline />
+
+        {/* Trigger log */}
+        <TriggerLog />
 
         {/* Block gates */}
         {blockGates.length > 0 && (

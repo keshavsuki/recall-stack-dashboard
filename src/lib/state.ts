@@ -49,6 +49,13 @@ export function buildState(): DashboardState {
     health: buildHealth(),
     claudeMd: "",
     hindsightPatterns: [],
+    decisions: [],
+    costs: { entries: [], totalCost: 0, dailyBreakdown: [], modelBreakdown: [] },
+    trends: { sessionsPerDay: [], gatesPerDay: [], lessonsCumulative: [], topCommands: [] },
+    agents: [],
+    repos: [],
+    sessionDetails: [],
+    gateTriggers: [],
   };
 
   // Load CLAUDE.md

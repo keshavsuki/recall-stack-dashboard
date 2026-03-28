@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/sidebar";
 import { WSProvider } from "@/components/shared/ws-provider";
+import { NotificationProvider } from "@/components/notifications/notification-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,8 +34,10 @@ export default function RootLayout({
     >
       <body className="flex h-screen bg-[#fafbfc] text-zinc-800">
         <WSProvider>
-          <Sidebar />
-          <main className="flex-1 overflow-auto">{children}</main>
+          <NotificationProvider>
+            <Sidebar />
+            <main className="flex-1 overflow-auto">{children}</main>
+          </NotificationProvider>
         </WSProvider>
       </body>
     </html>

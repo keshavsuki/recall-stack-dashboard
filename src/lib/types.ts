@@ -74,6 +74,13 @@ export interface DashboardState {
   health: HealthStatus;
   claudeMd: string;
   hindsightPatterns: string[];
+  decisions: Decision[];
+  costs: CostSummary;
+  trends: TrendData;
+  agents: AgentRole[];
+  repos: RepoSummary[];
+  sessionDetails: SessionDetail[];
+  gateTriggers: GateTrigger[];
 }
 
 export interface ActivityItem {
@@ -85,6 +92,93 @@ export interface ActivityItem {
   level?: "info" | "warn" | "block";
 }
 
+export interface Decision {
+  id: string;
+  timestamp: number;
+  description: string;
+  agent: string;
+  reason: string;
+  tokenCost: number;
+  outcome: "success" | "blocked" | "reverted" | "pending";
+}
+
+export interface UsageEntry {
+  date: string;
+  sessionId: string;
+  model: string;
+  inputTokens: number;
+  outputTokens: number;
+  costUsd: number;
+}
+
+export interface CostSummary {
+  entries: UsageEntry[];
+  totalCost: number;
+  dailyBreakdown: { date: string; cost: number }[];
+  modelBreakdown: { model: string; cost: number; tokens: number }[];
+}
+
+export interface TrendData {
+  sessionsPerDay: { date: string; count: number }[];
+  gatesPerDay: { date: string; count: number }[];
+  lessonsCumulative: { date: string; total: number }[];
+  topCommands: { command: string; count: number }[];
+}
+
+export interface AgentRole {
+  id: string;
+  name: string;
+  role: string;
+  icon: string;
+  status: "active" | "idle";
+  recentActions: string[];
+  totalActions: number;
+  lastActive: number;
+}
+
+export interface RepoSummary {
+  name: string;
+  path: string;
+  lastActivity: number;
+  commandCount: number;
+  activeGates: number;
+  hasClaudeMd: boolean;
+  hasAgentsMd: boolean;
+}
+
+export interface SessionDetail extends Session {
+  duration: number;
+  commandCount: number;
+  filesChanged: string[];
+  timeline: SessionEvent[];
+  status: "active" | "ended";
+}
+
+export interface SessionEvent {
+  timestamp: number;
+  type: "command" | "file" | "gate";
+  description: string;
+  detail?: string;
+}
+
+export interface GateTrigger {
+  id: string;
+  timestamp: number;
+  gateName: string;
+  blocked: string;
+  toolCall: string;
+  level: "block" | "warn";
+}
+
+export interface AppNotification {
+  id: string;
+  timestamp: number;
+  type: "gate_block" | "lesson_promoted" | "session_start" | "session_end" | "system";
+  title: string;
+  message: string;
+  read: boolean;
+}
+
 export type WSEvent =
   | { type: "snapshot"; data: DashboardState }
   | { type: "primer:updated"; data: PrimerState }
@@ -94,4 +188,7 @@ export type WSEvent =
   | { type: "session:ended"; data: Session }
   | { type: "history:appended"; data: HistoryEntry[] }
   | { type: "activity"; data: ActivityItem }
-  | { type: "health:status"; data: HealthStatus };
+  | { type: "health:status"; data: HealthStatus }
+  | { type: "decisions:updated"; data: Decision[] }
+  | { type: "costs:updated"; data: CostSummary }
+  | { type: "triggers:updated"; data: GateTrigger[] };

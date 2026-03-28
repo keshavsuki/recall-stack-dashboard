@@ -109,6 +109,21 @@ export function WSProvider({ children }: { children: ReactNode }) {
               prev ? { ...prev, health: msg.data } : prev
             );
             break;
+          case "decisions:updated":
+            setState((prev) =>
+              prev ? { ...prev, decisions: msg.data } : prev
+            );
+            break;
+          case "costs:updated":
+            setState((prev) =>
+              prev ? { ...prev, costs: msg.data } : prev
+            );
+            break;
+          case "triggers:updated":
+            setState((prev) =>
+              prev ? { ...prev, gateTriggers: msg.data } : prev
+            );
+            break;
         }
       } catch {
         // Ignore parse errors
