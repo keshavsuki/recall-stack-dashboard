@@ -1,14 +1,14 @@
-import { Header } from "@/components/layout/header";
-import { ActivityFeed } from "@/components/dashboard/activity-feed";
-import { StatusCards } from "@/components/dashboard/status-cards";
+import { HeroBanner } from "@/components/dashboard/hero-banner";
+import { StatsRibbon } from "@/components/dashboard/stats-ribbon";
+import { ActivityTimeline } from "@/components/dashboard/activity-timeline";
 
 export default function DashboardPage() {
   return (
     <div className="flex h-full flex-col">
-      <Header title="Dashboard" />
-      <div className="flex-1 space-y-6 p-8">
-        <StatusCards />
-        <ActivityFeed />
+      <HeroBanner />
+      <StatsRibbon />
+      <div className="flex-1 px-8 pb-8 pt-6">
+        <ActivityTimeline />
       </div>
     </div>
   );

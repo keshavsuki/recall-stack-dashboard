@@ -29,29 +29,40 @@ export function Sidebar() {
   const { connected } = useWS();
 
   return (
-    <aside className="flex h-screen w-60 flex-col border-r border-zinc-200/80 bg-white shadow-[1px_0_8px_rgba(0,0,0,0.03)]">
-      <div className="flex items-center gap-3 px-5 py-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-blue-500 shadow-md shadow-violet-200/50">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4.5 w-4.5 text-white"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
-        </div>
-        <div>
-          <div className="text-sm font-bold text-zinc-900 tracking-tight">recall-stack</div>
-          <div className="flex items-center gap-1.5 text-[11px] text-zinc-400">
-            <StatusDot active={connected} />
-            {connected ? "live" : "connecting..."}
+    <aside className="flex h-screen w-[220px] flex-col border-r border-zinc-200/60 bg-white">
+      {/* Brand area with subtle gradient */}
+      <div className="sidebar-brand px-5 pb-4 pt-6">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-blue-500 shadow-lg shadow-violet-200/50">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              className="h-4 w-4 text-white"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <div>
+            <div className="text-[13px] font-bold text-zinc-900 tracking-tight">
+              recall-stack
+            </div>
+            <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 font-medium">
+              <StatusDot active={connected} />
+              {connected ? "live" : "connecting..."}
+            </div>
           </div>
         </div>
       </div>
 
-      <nav className="flex-1 space-y-0.5 px-3 py-2">
+      {/* Navigation */}
+      <nav className="flex-1 space-y-0.5 px-3 pt-2">
+        <div className="px-3 pb-2 pt-1">
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-300">
+            Navigation
+          </span>
+        </div>
         {NAV_ITEMS.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -60,9 +71,9 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-200",
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-all duration-150",
                 active
-                  ? "bg-gradient-to-r from-violet-50 to-blue-50 text-violet-700 shadow-sm"
+                  ? "bg-violet-50/80 text-violet-700"
                   : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700"
               )}
             >
@@ -74,20 +85,24 @@ export function Sidebar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className={cn(
-                  "h-[18px] w-[18px]",
+                  "h-4 w-4",
                   active ? "text-violet-500" : "text-zinc-400"
                 )}
               >
                 <path d={ICONS[item.icon]} />
               </svg>
               {item.label}
+              {active && (
+                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-violet-400" />
+              )}
             </Link>
           );
         })}
       </nav>
 
+      {/* Footer */}
       <div className="border-t border-zinc-100 px-5 py-4">
-        <div className="text-[10px] uppercase tracking-widest text-zinc-300 font-medium">
+        <div className="text-[10px] text-zinc-300 font-medium tracking-wide">
           recall-stack v1.0
         </div>
       </div>

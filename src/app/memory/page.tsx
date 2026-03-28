@@ -6,11 +6,12 @@ export default function MemoryPage() {
   return (
     <div className="flex h-full flex-col">
       <Header title="Memory" />
-      <div className="flex-1 p-8">
-        <div className="grid grid-cols-2 gap-8">
-          <LayerStack />
-          <PrimerViewer />
-        </div>
+      <div className="flex-1 p-8 space-y-8">
+        {/* Layer stack as the hero element: full width */}
+        <LayerStack />
+
+        {/* Primer viewer below */}
+        <PrimerViewer />
       </div>
     </div>
   );

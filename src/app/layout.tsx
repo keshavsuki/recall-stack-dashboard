@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex h-screen bg-[#f8f9fb] text-zinc-800">
+      <body className="flex h-screen bg-[#fafbfc] text-zinc-800">
         <WSProvider>
           <Sidebar />
           <main className="flex-1 overflow-auto">{children}</main>
