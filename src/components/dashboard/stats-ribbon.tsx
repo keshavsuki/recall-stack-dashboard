@@ -13,7 +13,7 @@ function RibbonStat({ label, value, color }: RibbonStatProps) {
     <div className="flex items-center gap-3">
       <div className={`h-2 w-2 rounded-full ${color}`} />
       <div className="flex items-baseline gap-1.5">
-        <span className="text-lg font-bold tracking-tight text-zinc-900">
+        <span className="text-2xl font-extrabold tracking-tight text-zinc-900">
           {value}
         </span>
         <span className="text-xs text-zinc-400 font-medium">{label}</span>
